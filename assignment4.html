@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assignment4.css">
+    <title>Simple Payroll</title>
+</head>
+<body>
+<div>
+    <div class="form">
+        <div>
+            <label for="number">Employee Number: </label><br>
+            <input type="number" name="" id="number">
+        </div>
+        <div>
+            <label for="name">Name: </label> <br>
+            <input type="text" name="name" id="name" placeholder="Enter Name">
+        </div>
+        <div>
+            <label for="days">Days Worked: </label> <br>
+            <input type="text" name="days" id="days" placeholder="Enter Number of Days">
+        </div>
+        <div>
+            <label for="rate">Daily Rate: </label> <br>
+            <input type="text" name="rate" id="rate" placeholder="Enter rate">
+        </div>
+        <div>
+            <label for="deduction">Deduction Amount: </label> <br>
+            <input type="text" name="deduction" id="deduction" placeholder="Enter Deduction">
+        </div>
+        <div>
+            <label for="current">Current number of Employees</label>
+            <input type="text" name="" id="current">
+        </div>
+        <button onclick="addToList()">Submit</button> 
+       
+        <input type="number" name="" id="remove" placeholder="Select ID to Remove"> 
+        <button onclick="remove()">Remove</button>
+
+    </div>
+    <a href="index.html">Back to Home Page</a>
+    <div class="table">
+        <table id="info">
+            <tr>
+                <th>Employee Number</th>
+                <th>Employee Name</th>
+                <th>Days Worked</th>
+                <th>Daily Rate</th>
+                <th>Gross Pay</th>
+                <th>Deduction Amount</th>
+                <th>Net Pay</th>
+            </tr>
+            <tbody id="content">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    <script>
+        var list = [];
+
+        function addToList(){
+
+            var person = {
+                "number": 1,
+                "name": "Name",
+                "days": 1,
+                "rate": 1,
+                "deduction": 1,
+                "gross" : function gross(){
+                    return this.days*this.rate;
+                },
+                "netPay" : function netPay(){
+                    return this.gross() - this.deduction;
+                }
+            };
+
+            person.number=document.getElementById("number").value;
+            person.name=document.getElementById("name").value;
+            person.days=document.getElementById("days").value;
+            person.rate=document.getElementById("rate").value;
+            person.deduction=document.getElementById("deduction").value*1;
+            
+
+            list.push(person);
+            console.log(person);
+            console.log(list.length)
+            document.getElementById("current").value = list.length;
+            
+            var i,l,listContent;
+            l = list.length;
+
+            for(let i=0;i<l;i++){
+                listContent+=
+                "<tr><td>"+list[i].number+"</td>"+
+                "<td>"+list[i].name+"</td>"+
+                "<td>"+list[i].days+"</td>"+
+                "<td>"+list[i].rate+"</td>"+
+                "<td>"+list[i].gross()+"</td>"+
+                "<td>"+list[i].deduction+"</td>"+
+                "<td>"+list[i].netPay()+"</td></tr>";
+            }
+            document.getElementById("content").innerHTML=listContent;
+        }
+
+        
+        
+        
+    </script>
+</body>
+</html>

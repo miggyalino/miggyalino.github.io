@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assignment2.css">
+    <title>Assignment 2</title>
+</head>
+<body>
+    <h1>Income Tax Calculator</h1>
+    <input type="text" name="" id="income" placeholder="Input Income Here">
+    <button onclick="calculate()">Calculate Tax</button>
+    <h2>Your Income Tax is - <span id="value"></span></h2>
+    <a href="index.html">Back to Home Page</a>
+    <script>
+        function calculate(){
+            var income = document.getElementById("income").value;
+            var taxRate = null;
+            if(income < 250000){
+                taxRate = 0;
+            }
+            else if (income < 400000){
+                taxRate = (income-250000) * 0.20;
+            }
+            else if(income < 800000){
+                taxRate = 30000 + ((income - 400000) * 0.25);
+            }
+            else if(income < 2000000){
+                taxRate = 130000 + ((income - 800000) * 0.30);
+            }
+            else if(income < 8000000){
+                taxRate = 490000 + ((income - 2000000) * 0.32);
+            }
+            else{
+                taxRate = 2410000 + ((income - 8000000) * 0.35);
+            }
+            document.getElementById("value").innerHTML = taxRate;
+        }
+    </script>
+</body>
+</html>
